@@ -2,9 +2,13 @@ import React, {useState, useEffect} from "react"
 import {View, StyleSheet, Text, TouchableOpacity, ScrollView} from 'react-native'
 import {Ionicons} from '@expo/vector-icons'
 import { FloatingLabelInput } from 'react-native-floating-label-input'
+import {useAsyncStorage} from '@react-native-async-storage/async-storage'
+import uuid from 'react-native-uuid'
+
 
 
 import Buttons from "../components/Buttons"
+import Header from "../components/Header"
 
 export default function Cadastro({navigation}) {
 
@@ -14,28 +18,39 @@ export default function Cadastro({navigation}) {
     const [cpf, setCpf] = useState('')
     const [telefone, setTelefone] = useState('')
 
-    function handlerNew(data) {
-        if (nome !== '' && email !=='' && cpf !=='' && telefone!=='' && password!=='') {
+    const {getItem, setItem} = useAsyncStorage("@SaveUser:User")
 
-            console.log(data = {
-                nome,
-                email,
-                cpf,
-                telefone,
-                password,
-            })
+     async function handlerNew() {
+
+        const id = uuid.v4()
+        
+         const NewData = {
+            id,
+            nome,
+            email,
+            cpf,
+            telefone,
+            password
+         }
+
+         const response = await getItem()
+         const PreviousData = response ? JSON.parse(response) : []
+
+         const Data = [...PreviousData, NewData]
+
+         await setItem(JSON.stringify(Data))
+
+         alert(
+             "Cadastrado com Sucesso"
+         )
+
             navigation.navigate('Login')
-        }
+        
     }
 
     return (
         <View style={styles.container}>
-                <View style={styles.header}>
-                    <TouchableOpacity onPress={() => navigation.navigate('HomeScreen')}>
-                        <Ionicons name='chevron-back-sharp' color='#434343F2' size={23} style={styles.back}/>
-                    </TouchableOpacity>
-                    <Text style={styles.pagina}>Fazer Cadastro</Text>
-                </View>
+            <Header navigation = {navigation} name="Fazer cadastro"/>
             < ScrollView>
                 <View style={styles.inputArea}>
 
@@ -102,7 +117,7 @@ export default function Cadastro({navigation}) {
                         }
                     />
                     
-                    <TouchableOpacity onPress={() => handlerNew(nome)}>
+                    <TouchableOpacity onPress={() => handlerNew()}>
                         <Buttons caminho='Avançar'/>
                     </TouchableOpacity>
                 </View>
@@ -118,22 +133,6 @@ const styles = StyleSheet.create({
       flex: 1,
       backgroundColor: '#FFFFFF',
       justifyContent: 'flex-start',
-    },
-
-    pagina: {
-        fontSize: 18,
-        color: '#434343F2',
-        alignItems: 'center',
-    },
-    header: {
-        marginTop: 64,
-        flexDirection: 'row',
-    },
-
-    back: {
-        alignSelf: 'flex-start',
-        marginRight: 73,
-        paddingLeft: 30,
     },
 
     inputArea: {

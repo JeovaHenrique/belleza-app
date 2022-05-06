@@ -1,31 +1,41 @@
-import React, {useState} from "react"
-import {View, StyleSheet, Text, TouchableOpacity, ScrollView} from 'react-native'
+import React, {useState, useCallback} from "react"
+import {View, StyleSheet, Text, TouchableOpacity} from 'react-native'
 import {Ionicons} from '@expo/vector-icons'
 import { FloatingLabelInput } from 'react-native-floating-label-input'
+import {useAsyncStorage} from '@react-native-async-storage/async-storage'
+import { useFocusEffect } from "@react-navigation/native"
 
 
 import Buttons from "../components/Buttons"
+import Header from "../components/Header"
 
 export default function Cadastro({navigation}) {
 
     const [email, setEmail] = useState('')
     const [password, setPassword] = useState('')
+    const [data, setData] = useState([])
 
-    function handlerNew(data) {
-        if (email !=='' && password!=='') {
+    const {getItem} = useAsyncStorage('@SaveUser:User')
 
-            navigation.navigate('Login')
+    async function handlerUser() {
+
+        const response = await getItem()
+        const data = response ? JSON.parse(response) : []
+        setData(data)
+        
+            if(data.email === email && data.password === password) {
+                navigation.navigate('Login')
+
         }
     }
 
+    useFocusEffect(useCallback(()=> {
+        handlerUser()
+    }, []))
+
     return (
         <View style={styles.container}>
-                <View style={styles.header}>
-                    <TouchableOpacity onPress={() => navigation.navigate('HomeScreen')}>
-                        <Ionicons name='chevron-back-sharp' color='#434343F2' size={23} style={styles.back}/>
-                    </TouchableOpacity>
-                    <Text style={styles.pagina}>Entrar</Text>
-                </View>
+                <Header navigation = {navigation} name="Entrar"/>
                 <View style={styles.loginArea}>
 
                     <FloatingLabelInput
@@ -56,7 +66,7 @@ export default function Cadastro({navigation}) {
                         }
                     />
                     
-                    <TouchableOpacity>
+                    <TouchableOpacity onPress={() => handlerUser()}>
                         <Buttons caminho='Entrar'/>
                     </TouchableOpacity>
                 </View>
@@ -82,26 +92,9 @@ const styles = StyleSheet.create({
       justifyContent: 'flex-start',
     },
 
-    pagina: {
-        fontSize: 18,
-        color: '#434343F2',
-        alignItems: 'center',
-        paddingLeft: 35,
-    },
-    header: {
-        marginTop: 64,
-        flexDirection: 'row',
-    },
-
-    back: {
-        alignSelf: 'flex-start',
-        marginRight: 73,
-        paddingLeft: 30,
-    },
-
     loginArea: {
-        marginTop: 159,
-        marginBottom: 30,
+        marginTop: 140,
+        marginBottom: 20,
         alignItems: 'center',
         justifyContent: 'center',
 

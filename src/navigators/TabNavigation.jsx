@@ -1,8 +1,10 @@
 import React from 'react'
 import { createBottomTabNavigator} from '@react-navigation/bottom-tabs'
-import { FontAwesome5} from '@expo/vector-icons'
+import {Ionicons} from '@expo/vector-icons'
 
-import HomeLogin from '../screens/HomeLogin'
+import HomeStackScreen from './HomeStackScreen'
+import Pedido from '../screens/Pedido'
+import Pesquisa from '../screens/Pesquisa'
 
 const Tab = createBottomTabNavigator()
 
@@ -10,21 +12,39 @@ export default function LoggedTabNavigator() {
     return (
        <Tab.Navigator>
            <Tab.Screen
-                name="HomeStackNavigator"
-                component={HomeStackNavigator}
+                name="HomeStackScreen"
+                component={HomeStackScreen}
                 options={{
                     headerShown: false,
-                    title: 'Feed',
-                    tabBarIcon: ({color, size}) => <FontAwesome5 name='newspaper' size={size} color={color} />
+                    title: 'Principal',
+                    tabBarIcon: () => <Ionicons name='home' color='#434343F2' size={23}/>
                 }}
            />
            <Tab.Screen
-                name="PictureStackNavigator"
-                component={PictureStackNavigator}
+                name="Pesquisa"
+                component={Pesquisa}
                 options={{
                     headerShown: false,
-                    title: 'Images',
-                    tabBarIcon: ({color, size}) => <FontAwesome5 name='image' size={size} color={color} />
+                    title: 'Pequisa',
+                    tabBarIcon: () => <Ionicons name='ios-search' color='#434343F2' size={23}/>
+                }}
+           />
+           <Tab.Screen
+                name="Pedido"
+                component={Pedido}
+                options={{
+                    headerShown: false,
+                    title: 'Pedidos',
+                    tabBarIcon: () => <Ionicons name='md-document-text-outline' color='#434343F2' size={23}/>
+                }}
+           />
+           <Tab.Screen
+                name="cartao"
+                component={Pedido}
+                options={{
+                    headerShown: false,
+                    title: 'cong',
+                    tabBarIcon: ({color, size}) => <Ionicons name='settings' color='#434343F2' size={23}/>
                 }}
            />
        </Tab.Navigator> 
