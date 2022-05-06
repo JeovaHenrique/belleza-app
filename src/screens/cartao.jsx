@@ -1,7 +1,7 @@
 import React from 'react'
 import {View, StyleSheet, TouchableOpacity, Text, Image, Card} from 'react-native'
 
-export default function HomeLogin() {
+export default function Cartao() {
     return (
         <View style={styles.container}>
             <Text>

@@ -14,18 +14,18 @@ export default function Cadastro({navigation}) {
     const [email, setEmail] = useState('')
     const [password, setPassword] = useState('')
     const [data, setData] = useState([])
-
+    
     const {getItem} = useAsyncStorage('@SaveUser:User')
 
     async function handlerUser() {
 
-        const response = await getItem()
+        {/*const response = await getItem()
         const data = response ? JSON.parse(response) : []
-        setData(data)
+        setData(data)*/}
         
-            if(data.email === email && data.password === password) {
-                navigation.navigate('Login')
-
+        if(email !== '' && password !== '') {
+            console.log(data)
+            await navigation.navigate('LoggedTabNavigator')    
         }
     }
 

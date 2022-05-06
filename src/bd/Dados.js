@@ -1,7 +1,29 @@
 import React from 'react'
-import { View, StyleSheet, TouchableOpacity, Text, Image, FlatList, SafeAreaView } from 'react-native'
+import {  View, StyleSheet, TouchableOpacity, Text, Image, FlatList, SafeAreaView } from 'react-native'
 
-const CabeloData = [
+const dados = [
+    {
+        id: 1,
+        title: "Pés e Mão",
+        valor: "R$ 19,90",
+        src: require('../img/pesMao.jpg')
+
+    },
+    {
+        id: 2,
+        title: "Pés",
+        valor: "R$ 9,90",
+        src: require("../img/pes.png")
+
+    },
+    {
+        id: 3,
+        title: "Mão",
+        valor: "R$ 9,90",
+        src: require("../img/mao.png")
+
+    },
+
     {
         id: 4,
         title: "Escova em Cabelos Curtos",
@@ -24,12 +46,57 @@ const CabeloData = [
         valor: "R$ 49,90",
         src: require("../img/cacheado.png")
 
-    }
+    },
 
+    {
+        id: 7,
+        title: "Massagem Corporal",
+        valor: "R$ 89,90",
+        src: require("../img/MassagemCorporal.png")
+
+    },
+
+    {
+        id: 8,
+        title: "Massagem Facial",
+        valor: "R$ 59,90",
+        src: require("../img/MassagemFacial.png")
+
+    },
+
+    {
+        id: 9,
+        title: "Massagem Casal",
+        valor: "R$ 109,90",
+        src: require("../img/MassagemCasal.png")
+
+    },
+
+    {
+        id: 10,
+        title: "Depilação na Cera",
+        valor: "R$ 159,90",
+        src: require('../img/depilacaoCera.png')
+
+    },
+    {
+        id: 11,
+        title: "Depilação a Lazer",
+        valor: "R$ 9,90",
+        src: require("../img/depilacaoLaser.png")
+
+    },
+    {
+        id: 12,
+        title: "Depilação na pinca",
+        valor: "R$ 9,90",
+        src: require("../img/depilacaoPince.png")
+
+    }
 ]
 
 function renderItem({ item }) {
-    return <View style={styles.container}>
+    return <SafeAreaView style={styles.container}>
         <Image style={styles.imgPromo} source={item.src} />
         <Text style={styles.title}>{item.title}</Text>
         <Text style={styles.valor}>A partir de</Text>
@@ -37,25 +104,31 @@ function renderItem({ item }) {
         <TouchableOpacity style={styles.bts} >
             <Text style={styles.texto}>Conhecer</Text>
         </TouchableOpacity>
-    </View>
+    </SafeAreaView>
 }
 
-export default function Cabelo() {
+export default function Dados() {
     return (
-        <FlatList
-            data={CabeloData}
-            renderItem={renderItem}
-            keyExtractor={item => item.id}
-            horizontal
-            showsHorizontalScrollIndicator={false}
-        />
+        <View style={styles.container}>
+
+            <FlatList
+                data={dados}
+                renderItem={renderItem}
+                keyExtractor={item => item.id}
+                showsHorizontalScrollIndicator={false} />
+        </View>
+
     )
 }
 
 const styles = StyleSheet.create({
     container: {
+        flex: 1,
+    },
+
+    containerBox: {
         height: 300,
-        width:200,
+        width: 150,
         borderColor: '#FFFFFF',
         borderRadius: 20,
         marginLeft: 10,
@@ -64,7 +137,7 @@ const styles = StyleSheet.create({
 
     imgPromo: {
         height: 150,
-        width: "100%",
+        width: 150,
         marginBottom: 10,
         paddingLeft: 10,
         borderTopRightRadius: 20,
@@ -72,6 +145,8 @@ const styles = StyleSheet.create({
     },
 
     title: {
+        flexDirection: 'row',
+        flexWrap: "wrap",
         fontSize: 16,
         paddingLeft: 20,
         color: '#434343F2',
@@ -94,7 +169,7 @@ const styles = StyleSheet.create({
     },
 
     bts: {
-        width: 190,
+        width: 120,
         height: 45,
         marginHorizontal: 10,
         backgroundColor: '#95B8C4',
@@ -108,6 +183,6 @@ const styles = StyleSheet.create({
         color: '#fff',
         opacity: 1,
         letterSpacing: 0,
-    },
+    }
 
 })

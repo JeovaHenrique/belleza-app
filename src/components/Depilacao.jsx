@@ -3,23 +3,23 @@ import { View, StyleSheet, TouchableOpacity, Text, Image, FlatList } from 'react
 
 
 
-const UnhaData = [
+const depilacaoData = [
     {
-        id: 1,
+        id: 10,
         title: "Depilação na Cera",
         valor: "R$ 159,90",
         src: require('../img/depilacaoCera.png')
 
     },
     {
-        id: 2,
+        id: 11,
         title: "Depilação a Lazer",
         valor: "R$ 9,90",
         src: require("../img/depilacaoLaser.png")
 
     },
     {
-        id: 3,
+        id: 12,
         title: "Depilação na pinca",
         valor: "R$ 9,90",
         src: require("../img/depilacaoPince.png")
@@ -28,7 +28,7 @@ const UnhaData = [
 ]
 
 function renderItem({ item }) {
-    return <View style={styles.containerUnha}>
+    return <View style={styles.container}>
         <Image style={styles.imgPromo} source={item.src} />
         <Text style={styles.title}>{item.title}</Text>
         <Text style={styles.valor}>A partir de</Text>
@@ -42,7 +42,7 @@ function renderItem({ item }) {
 export default function Depilacao() {
     return (
         <FlatList
-            data={UnhaData}
+            data={depilacaoData}
             renderItem={renderItem}
             keyExtractor={item => item.id}
             horizontal
@@ -52,7 +52,7 @@ export default function Depilacao() {
 }
 
 const styles = StyleSheet.create({
-    containerUnha: {
+    container: {
         height: 300,
         borderColor: '#FFFFFF',
         borderRadius: 20,

@@ -1,7 +1,7 @@
 import React, {useState, useEffect} from "react"
 import {View, StyleSheet, Text, TouchableOpacity, ScrollView, Button} from 'react-native'
-import {Ionicons} from '@expo/vector-icons'
 import { FloatingLabelInput } from 'react-native-floating-label-input'
+import {useAsyncStorage} from '@react-native-async-storage/async-storage'
 
 
 import Buttons from "../components/Buttons"
@@ -15,29 +15,28 @@ export default function Endereco({navigation}) {
     const [complemento, setComplemento] = useState('')
     const [bairro, setBairro] = useState('')
 
-    async function handlerNew(data) {
+    const {getItem, setItem} = useAsyncStorage('@SaveEndereco:Endereco')
 
-        const id = uuid.v4()
+    async function handlerNewEndereco() {
         
          const NewData = {
-            id,
-            nome,
-            email,
-            cpf,
-            telefone,
-            password
+            CEP,
+            rua,
+            numCasa,
+            complemento,
+            bairro,
          }
 
-         await AsyncStoge.setItem('@SaveEndereco:Endereco', JSON.stringify(NewData))
+         await setItem(JSON.stringify(NewData))
 
          alert(
              "Cadastrado com Sucesso"
          )
 
-        if (nome !== '' && email !=='' && cpf !=='' && telefone!=='' && password!=='') {
-
-            navigation.navigate('Login')
-        }
+        const response = await getItem()
+        const data = response ? JSON.parse(response) : []
+        console.log(data)
+        navigation.goBack()
     }
 
     return (
@@ -110,7 +109,7 @@ export default function Endereco({navigation}) {
                         />
                     
                     
-                    <TouchableOpacity onPress={() => handlerNew(nome)}>
+                    <TouchableOpacity onPress={() => handlerNewEndereco()}>
                         <Buttons caminho='Adicionar Endereço'/>
                     </TouchableOpacity>
                 </View>

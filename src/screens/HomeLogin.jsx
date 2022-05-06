@@ -1,6 +1,8 @@
-import React, { useState } from 'react'
-import { View, StyleSheet, TouchableOpacity, Text, Image, FlatList, ScrollView } from 'react-native'
+import React, { useState, useCallback } from 'react'
+import { View, StyleSheet, TouchableOpacity, Text, ScrollView } from 'react-native'
 import { Ionicons } from '@expo/vector-icons'
+import {useAsyncStorage} from '@react-native-async-storage/async-storage'
+import { useFocusEffect } from "@react-navigation/native"
 
 import Promo from '../components/Promo'
 import Unhas from '../components/Unhas'
@@ -8,15 +10,41 @@ import Massagem from '../components/Massagem'
 import Cabelo from '../components/Cabelo'
 import Depilacao from '../components/Depilacao'
 
+
+const {getItem} = useAsyncStorage('@SaveUser:User')
+
 export default function HomeLogin({navigation}) {
   const [endereço, setEndereco] = useState("Adicione um endereço")
+  const [data, setData] = useState([])
+
+  async function handlerUserName() {
+
+    const response = await getItem()
+    const data = response ? JSON.parse(response) : []
+    setData(data)
+    console.log(data)
+}
+
+async function handlerEndereco() {
+      
+ const response = await getItem()
+ const data = response ? JSON.parse(response) : []
+ console.log(data)
+ const {rua, numCasa} = data
+ setEndereco(`${rua}, ${numCasa}`)
+}
+
+useFocusEffect(useCallback(()=> {
+  handlerUserName()
+  handlerEndereco()
+}, []))
 
   return (
     <View style={styles.container}>
       <View style={styles.backgr} />
       <View style={styles.recepção}>
         <Text style={{ fontSize: 36, color: "#FFFFFFF2" }}>
-          Olá, "Nome",
+          Olá, nome,
         </Text>
         <Text style={styles.atendimento}>
           Onde será seu atendimento hoje?

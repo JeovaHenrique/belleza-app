@@ -1,7 +1,5 @@
 import React from 'react'
-import { View, StyleSheet, TouchableOpacity, Text, Image, FlatList } from 'react-native'
-
-
+import { View, StyleSheet, Text, Image, FlatList, TouchableOpacity } from 'react-native'
 
 const UnhaData = [
     {
@@ -28,12 +26,12 @@ const UnhaData = [
 ]
 
 function renderItem({ item }) {
-    return <View style={styles.containerUnha}>
+    return <View style={styles.container}>
         <Image style={styles.imgPromo} source={item.src} />
         <Text style={styles.title}>{item.title}</Text>
         <Text style={styles.valor}>A partir de</Text>
         <Text style={styles.valorReal}>{item.valor}</Text>
-        <TouchableOpacity style={styles.bts} >
+        <TouchableOpacity style={styles.bts}>
             <Text style={styles.texto}>Conhecer</Text>
         </TouchableOpacity>
     </View>
@@ -52,7 +50,7 @@ export default function Unhas() {
 }
 
 const styles = StyleSheet.create({
-    containerUnha: {
+    container: {
         height: 300,
         borderColor: '#FFFFFF',
         borderRadius: 20,

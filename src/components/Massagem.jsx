@@ -31,7 +31,7 @@ const MassagemData = [
 ]
 
 function renderItem({ item }) {
-    return <View style={styles.containerUnha}>
+    return <View style={styles.container}>
         <Image style={styles.imgPromo} source={item.src} />
         <Text style={styles.title}>{item.title}</Text>
         <Text style={styles.valor}>A partir de</Text>
@@ -55,7 +55,7 @@ export default function Massagem() {
 }
 
 const styles = StyleSheet.create({
-    containerUnha: {
+    container: {
         height: 300,
         borderColor: '#FFFFFF',
         borderRadius: 20,

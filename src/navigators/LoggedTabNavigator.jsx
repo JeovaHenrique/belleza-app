@@ -10,8 +10,8 @@ const Tab = createBottomTabNavigator()
 
 export default function LoggedTabNavigator() {
     return (
-       <Tab.Navigator>
-           <Tab.Screen
+      <Tab.Navigator>
+            <Tab.Screen
                 name="HomeStackScreen"
                 component={HomeStackScreen}
                 options={{
@@ -25,7 +25,7 @@ export default function LoggedTabNavigator() {
                 component={Pesquisa}
                 options={{
                     headerShown: false,
-                    title: 'Pequisa',
+                    title: 'Pesquisa',
                     tabBarIcon: () => <Ionicons name='ios-search' color='#434343F2' size={23}/>
                 }}
            />
@@ -36,15 +36,6 @@ export default function LoggedTabNavigator() {
                     headerShown: false,
                     title: 'Pedidos',
                     tabBarIcon: () => <Ionicons name='md-document-text-outline' color='#434343F2' size={23}/>
-                }}
-           />
-           <Tab.Screen
-                name="cartao"
-                component={Pedido}
-                options={{
-                    headerShown: false,
-                    title: 'cong',
-                    tabBarIcon: ({color, size}) => <Ionicons name='settings' color='#434343F2' size={23}/>
                 }}
            />
        </Tab.Navigator> 

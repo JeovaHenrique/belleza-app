@@ -7,7 +7,7 @@ import HomeScreen from "./src/screens/HomeScreen"
 import Cadastro from './src/screens/Cadastro'
 import Login from './src/screens/Login'
 import HomeLogin from './src/screens/HomeLogin'
-import TabNavigation from './src/navigators/TabNavigation'
+import LoggedTabNavigator from './src/navigators/LoggedTabNavigator'
 
 const stack = createStackNavigator()
 
@@ -15,11 +15,11 @@ export default function App() {
   return (
     <NavigationContainer>
       <stack.Navigator>
-        {/*<stack.Screen name= 'HomeScreen' component={HomeScreen} options={{headerShown: false}}/>
+        <stack.Screen name= 'HomeScreen' component={HomeScreen} options={{headerShown: false}}/>
         <stack.Screen name= 'Cadastro' component={Cadastro} options={{headerShown: false}}/>
         <stack.Screen name= 'Login' component={Login} options={{headerShown: false}}/>
-  <stack.Screen name= 'HomeLogin' component={HomeLogin} options={{headerShown: false}}/>*/}
-        <stack.Screen name= 'TabNavigation' component={TabNavigation} options={{headerShown: false}}/>
+        <stack.Screen name= 'HomeLogin' component={HomeLogin} options={{headerShown: false}}/>
+        <stack.Screen name= 'LoggedTabNavigator' component={LoggedTabNavigator} options={{headerShown: false}}/>
       </stack.Navigator>
     </NavigationContainer>
   )

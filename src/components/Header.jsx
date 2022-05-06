@@ -22,8 +22,10 @@ const styles = StyleSheet.create({
         textAlign: 'center',
     },
     header: {
+        height: 100,
         marginTop: 64,
         flexDirection: 'row',
+        justifyContent: 'center',
     },
 
     back: {
